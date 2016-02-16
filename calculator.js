@@ -90,10 +90,30 @@ function validateInput(keypressed){
 		case '+': //plus
 		case '/': //plus
 		case '*': //times
-		case '=':
+
 			//clear result inputbox
 			document.getElementById("inputArea1").value = '';
 			//doEvaluation;
+			evaluateandReset(keypressed);
+			break;
+		case '=':
+			if (trackedNumber == '')
+				trackedNumber = String(currValue);
+			evaluateandReset(keypressed);
+			
+			break;
+
+		default:
+			trackedNumber+=keypressed;
+			console.log("theNumbertracked " + trackedNumber);
+			appendInputString(keypressed);
+
+		break;
+
+	}
+}
+
+function evaluateandReset(keypressed){
 			doEvaluation();
 			
 			//trackNewNumber 
@@ -103,25 +123,7 @@ function validateInput(keypressed){
 			pointAlreadyUsed = false;
 
 			lastSymbol = keypressed;
-			inputString = '';
-			//appendInputString(keypressed);
-			break;
-
-		break
-
-
-		default:
-			trackedNumber+=keypressed;
-			if (lastSymbol == '=')
-				currValue = Number(trackedNumber);
-			console.log("theNumbertracked " + trackedNumber);
-			appendInputString(keypressed);
-
-		break;
-
-	}
 }
-
 
 function doEvaluation(){
 
@@ -131,6 +133,8 @@ function doEvaluation(){
 		} else{
 			arithmeticEval();
 		}
+
+		inputString = String(currValue);
 	document.getElementById("inputArea1").value = currValue;
 }
 
@@ -153,7 +157,9 @@ function arithmeticEval(){
 			currValue /= Number(trackedNumber);
 			break;
 		case '=':
-			
+			if (trackedNumber != ''){
+			currValue = Number(trackedNumber);
+			}
 			break;
 	}
 }
