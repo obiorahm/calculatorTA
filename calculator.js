@@ -23,11 +23,15 @@ function displayString(keypressed){
 }
 
 function replaceInputString(keypressed){
-	inputString = '';
+	inputString = '0';
 }
 
 function appendInputString(keypressed){
-	inputString += String(keypressed);
+	if ((inputString=='0') && (keypressed != '.')){
+		inputString = keypressed;
+	}else{
+		inputString += String(keypressed);
+	}
 }
 
 function initSymbols(){
@@ -48,12 +52,13 @@ function validateInput(keypressed){
 	console.log("The key pressed" + keypressed);
 	switch (String(keypressed)){
 		case "clear":
-			inputString = "";
+			inputString = '0';
 			pointAlreadyUsed = false;
 			currValue = 0;
 			atStart = true;
 			lastSymbol ='';
 			trackedNumber ='';
+
 			document.getElementById("inputArea1").value = '0';
 
 
@@ -81,13 +86,13 @@ function validateInput(keypressed){
 			}
 			break;
 
-		case String.fromCharCode('&divide'): //divide
-		case '+_'://toggle minus and plus
 		case '-': //minus
 		case '+': //plus
 		case '/': //plus
 		case '*': //times
 		case '=':
+			//clear result inputbox
+			document.getElementById("inputArea1").value = '';
 			//doEvaluation;
 			doEvaluation();
 			
@@ -98,8 +103,11 @@ function validateInput(keypressed){
 			pointAlreadyUsed = false;
 
 			lastSymbol = keypressed;
-			appendInputString(keypressed);
+			inputString = '';
+			//appendInputString(keypressed);
 			break;
+
+		break
 
 
 		default:
