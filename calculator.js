@@ -1,4 +1,4 @@
-var inputString = "0";
+var inputString = "";
 
 var currValue = 0;
 
@@ -23,7 +23,7 @@ function displayString(keypressed){
 }
 
 function replaceInputString(keypressed){
-	inputString = '0';
+	inputString = '';
 }
 
 function appendInputString(keypressed){
@@ -31,7 +31,7 @@ function appendInputString(keypressed){
 }
 
 function initSymbols(){
-	inputString = "0";
+	inputString = "";
 
 	currValue = 0;
 
@@ -48,25 +48,35 @@ function validateInput(keypressed){
 	console.log("The key pressed" + keypressed);
 	switch (String(keypressed)){
 		case "clear":
-			inputString = "0";
+			inputString = "";
 			pointAlreadyUsed = false;
 			currValue = 0;
 			atStart = true;
 			lastSymbol ='';
 			trackedNumber ='';
-			document.getElementById("inputArea1").value = '';
+			document.getElementById("inputArea1").value = '0';
 
 
 			break;
 		case '+-':
+		if (atStart){
 			trackedNumber = -1 * trackedNumber;
 			inputString = String(trackedNumber);
+			document.getElementById("inputArea1").value = String(trackedNumber);
+
+		}else{
+			currValue = -1 * currValue;
+			document.getElementById("inputArea1").value = String(currValue);
+		}
+			
+
 			break;
 		case '.':
 			if (pointAlreadyUsed){
 
 			}else{
 				appendInputString(keypressed);
+				trackedNumber+=keypressed;
 				pointAlreadyUsed = true;
 			}
 			break;
