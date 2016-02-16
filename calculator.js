@@ -64,15 +64,17 @@ function validateInput(keypressed){
 
 			break;
 		case '+-':
-		if (atStart){
-			trackedNumber = -1 * trackedNumber;
-			inputString = String(trackedNumber);
-			document.getElementById("inputArea1").value = String(trackedNumber);
+			if (atStart || (lastSymbol == '=')){
+				trackedNumber = -1 * trackedNumber;
+				inputString = String(trackedNumber);
+				document.getElementById("inputArea1").value = String(trackedNumber);
+				console.log("got here");
+				atStart =false;
 
-		}else{
-			currValue = -1 * currValue;
-			document.getElementById("inputArea1").value = String(currValue);
-		}
+			}else{
+				currValue = -1 * currValue;
+				document.getElementById("inputArea1").value = String(currValue);
+			}
 			
 
 			break;
@@ -99,7 +101,9 @@ function validateInput(keypressed){
 		case '=':
 			if (trackedNumber == '')
 				trackedNumber = String(currValue);
+			
 			evaluateandReset(keypressed);
+			//atStart = true;
 			
 			break;
 
