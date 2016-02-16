@@ -104,7 +104,6 @@ function validateInput(keypressed){
 	}
 }
 
-function Evaluate 
 
 function doEvaluation(){
 
