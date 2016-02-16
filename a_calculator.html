@@ -1,0 +1,61 @@
+<html>
+<head>
+	<title>Calculator</title>
+	<link rel="stylesheet" href="calculator.css">
+	<script src="calculator.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="inner">
+			<div>
+				<input id="inputArea" type="text" class="enter">
+			</div>
+			<div>
+				<input id="inputArea1" type="text" class="enter">
+			</div>			
+			<div class="calc-row">
+				<input id="button_MC"  type="button" class="press"  value="MC">
+				<input id="button_Mp" type="button" class="press" value="M+">
+				<input id="button_Mm" type="button" class="press" value="M-">
+				<input id="button_MR" type="button" class="press" value="MR">
+			</div>
+			<div class="calc-row">
+				<input id="button_C" onClick="displayString('clear')" type="button" class="press" value="C">
+				<input id="button_pm" onClick="displayString('+-')" type="button" class="press" value="&plusmn">
+				<input id="button_MC" onClick="displayString('/')"type="button" class="press" value="&divide">
+				<input id="button_times" onClick="displayString('*')" type="button" class="press" value="&times">
+			</div>
+
+			<div class="calc-row">
+				<input id="button_7" onClick="displayString(7)" type="button" class="press" value="7">
+				<input id="button_8" onClick="displayString(8)" type="button" class="press" value="8">
+				<input id="button_9" onClick="displayString(9)" type="button" class="press" value="9">
+				<input id="button_minus" onClick="displayString('-')" type="button" class="press" value="&#x2212">
+			</div>
+			<div class="calc-row">
+				<input id="button_4" onClick="displayString(4)" type="button" class="press" value="4">
+				<input id="button_5" onClick="displayString(5)" type="button" class="press" value="5">
+				<input id="button_6" onClick="displayString(6)" type="button" class="press" value="6">
+				<input id="button_plus" onClick="displayString('+')" type="button" class="press" value="&#65291">
+			</div>
+			<div class="cols2">
+				<div class="calc-row">
+					<input id="button_1" onClick="displayString(1)" type="button" class="press" value="1">
+					<input id="button_2" onClick="displayString(2)" type="button" class="press" value="2">	
+					<input id="button_3" onClick="displayString(3)" type="button" class="press" value="3">
+				</div>
+				<div class="calc-row">
+					<input id="button_0" onClick="displayString(0)" class="press" type="button" value="0">
+					<input id="button_dot" onClick="displayString('.')" type="button" class="press" value=".">
+				</div>
+
+			</div>
+			<div class="equal">
+				<input id="button_equal" onClick="displayString('=')" class="press" type="button" value="=">
+			</div>
+		</div>
+			
+</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+html{
+	/*font-size: 5;*/
+}
+input {
+	margin-left: 0.1rem;
+	margin-right: 0.1rem;
+
+}
+
+
+.press{
+	
+	width: 5rem;
+	height: 2rem;
+	border: 1px solid;
+	border-radius: 0.4rem;
+	border-color: #6F6F6F;
+	box-shadow: -1px -1px 3px 1px #6F6F6F inset;
+	background-color: #D5D5D4;
+	text-shadow: 1px 1px 1px #FFFFFF;
+	
+}
+
+.enter{
+	width: 21rem;
+	height: 5rem;
+	border: 1px solid;
+	border-radius: 0.8rem;
+
+	margin-top:5px;
+	margin-bottom:10px;
+	border-color: #B0B0B0;
+	background-color: #F0FACA;
+	box-shadow: -1px -1px 3px 3px #6F6F6F;
+}
+
+
+
+.calc-row{
+
+	height: 3rem;
+
+}
+
+.container{
+	background-color: #BCBCBC;
+	width:22.3rem;
+
+	background: linear-gradient(#DADADA, #B1B1B1);
+	padding-top: 1rem;
+	padding-bottom:1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin: 0 auto auto auto;
+
+}
+
+
+
+
+#equal{
+	height: 4rem;
+}
+
+.2rowsdiv{
+	height: 6rem;
+}
+
+#rowsinput2{
+	height: 4rem;	
+
+}
+
+	.cols2{
+		width:16.4rem;
+		float: left;
+	}
+
+
+
+#button_equal{
+	height: 5rem;
+	padding-top: 2.8rem;
+}
+
+#button_0{
+	width: 10.5rem;
+}
+
+#inputArea{
+	text-align: right;
+}
