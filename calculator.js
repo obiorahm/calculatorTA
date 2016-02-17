@@ -1,5 +1,7 @@
 var inputString = "";
 
+var signString = "";
+
 var currValue = 0;
 
 var lastSymbol = '';
@@ -19,7 +21,9 @@ function displayString(keypressed){
 	}else{
 		validateInput(keypressed);
 	}
-	document.getElementById("inputArea").value = inputString;
+	document.getElementById("calc-output").innerHTML = inputString;
+	document.getElementById("calc-sign").innerHTML = signString;
+
 	console.log("The current Value " + currValue);
 	console.log("The tracked Number " + trackedNumber);
 	console.log("The keypressed " + keypressed);
@@ -43,6 +47,8 @@ function appendInputString(keypressed){
 function initSymbols(){
 	inputString = "";
 
+	signString = "";
+
 	currValue = 0;
 
 	lastSymbol = '';
@@ -58,6 +64,7 @@ function validateInput(keypressed){
 	switch (String(keypressed)){
 		case "clear":
 			inputString = '0';
+			signString = "";
 			pointAlreadyUsed = false;
 			currValue = 0;
 			atStart = true;
@@ -101,12 +108,14 @@ function validateInput(keypressed){
 		case '/': //plus
 		case '*': //times
 			evaluateandReset(keypressed);
+			signString = keypressed;
 			break;
 		case '=':
 			if (trackedNumber == '')
 				trackedNumber = String(currValue);
 			
 			evaluateandReset(keypressed);
+			signString = "";
 			break;
 
 		default:
@@ -114,10 +123,10 @@ function validateInput(keypressed){
 			if ((lastSymbol == '+-') || (lastSymbol == '=')){
 				currValue = trackedNumber;
 				atStart= true;
-
 			}
 
 			inputString = trackedNumber;
+			signString = "";
 
 		break;
 
