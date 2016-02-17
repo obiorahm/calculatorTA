@@ -20,6 +20,12 @@ function displayString(keypressed){
 		validateInput(keypressed);
 	}
 	document.getElementById("inputArea").value = inputString;
+	console.log("The current Value " + currValue);
+	console.log("The tracked Number " + trackedNumber);
+	console.log("The keypressed " + keypressed);
+	console.log ("are we just beginning " + atStart );
+	console.log("Lastsymbol " + lastSymbol);
+
 }
 
 function replaceInputString(keypressed){
@@ -49,7 +55,6 @@ function initSymbols(){
 }
 
 function validateInput(keypressed){
-	console.log("The key pressed" + keypressed);
 	switch (String(keypressed)){
 		case "clear":
 			inputString = '0';
@@ -58,23 +63,26 @@ function validateInput(keypressed){
 			atStart = true;
 			lastSymbol ='';
 			trackedNumber ='';
-
-			document.getElementById("inputArea1").value = '0';
-
-
 			break;
+
 		case '+-':
-			if (atStart || (lastSymbol == '=')){
-				trackedNumber = -1 * trackedNumber;
-				inputString = String(trackedNumber);
-				document.getElementById("inputArea1").value = String(trackedNumber);
-				console.log("got here");
+			if (atStart ){
+				check=currValue = trackedNumber =-1 * trackedNumber;
 				atStart =false;
 
 			}else{
-				currValue = -1 * currValue;
-				document.getElementById("inputArea1").value = String(currValue);
+				if (trackedNumber != '')
+				{
+					check=trackedNumber = -1 * trackedNumber;
+				}else{
+					check = currValue = -1 * currValue;
+				}
+				
 			}
+			
+			inputString = String(check);
+			//trackedNumber ='';
+			lastSymbol;
 			
 
 			break;
@@ -92,10 +100,6 @@ function validateInput(keypressed){
 		case '+': //plus
 		case '/': //plus
 		case '*': //times
-
-			//clear result inputbox
-			document.getElementById("inputArea1").value = '';
-			//doEvaluation;
 			evaluateandReset(keypressed);
 			break;
 		case '=':
@@ -103,14 +107,17 @@ function validateInput(keypressed){
 				trackedNumber = String(currValue);
 			
 			evaluateandReset(keypressed);
-			//atStart = true;
-			
 			break;
 
 		default:
 			trackedNumber+=keypressed;
-			console.log("theNumbertracked " + trackedNumber);
-			appendInputString(keypressed);
+			if ((lastSymbol == '+-') || (lastSymbol == '=')){
+				currValue = trackedNumber;
+				atStart= true;
+
+			}
+
+			inputString = trackedNumber;
 
 		break;
 
@@ -139,7 +146,6 @@ function doEvaluation(){
 		}
 
 		inputString = String(currValue);
-	document.getElementById("inputArea1").value = currValue;
 }
 
 //find a way to convert string to symbol to do away with switch
@@ -165,5 +171,15 @@ function arithmeticEval(){
 			currValue = Number(trackedNumber);
 			}
 			break;
+		default :
+			//currValue = Number(trackedNumber);
 	}
 }
+
+
+// new test cases
+// -10 + 5 -2 = -2
+// -10 + 5 +- 2 = 2 failing not evaluating and 
+// -10 + 5 +- + 2 = -3
+// -10 + -5 = -15
+// -10. + -5. = -15
