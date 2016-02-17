@@ -14,12 +14,12 @@ var atStart = true;
 
 //get the id of the clicked element
 
-function displayString(keypressed){
+function displayString(keypressed, asciipressed){
 	if ((String(inputString) == "0") && (keypressed == 0))
 	{
 		replaceInputString(keypressed);
 	}else{
-		validateInput(keypressed);
+		validateInput(keypressed,asciipressed);
 	}
 	document.getElementById("calc-output").innerHTML = inputString;
 	document.getElementById("calc-sign").innerHTML = signString;
@@ -60,7 +60,7 @@ function initSymbols(){
 	atStart = true;	
 }
 
-function validateInput(keypressed){
+function validateInput(keypressed, asciipressed){
 	switch (String(keypressed)){
 		case "clear":
 			inputString = '0';
@@ -108,7 +108,7 @@ function validateInput(keypressed){
 		case '/': //plus
 		case '*': //times
 			evaluateandReset(keypressed);
-			signString = keypressed;
+			signString = asciipressed;
 			break;
 		case '=':
 			if (trackedNumber == '')
