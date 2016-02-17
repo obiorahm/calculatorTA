@@ -16,8 +16,8 @@ var atStart = true;
 
 function displayString(keypressed, asciipressed) {
     validateInput(keypressed, asciipressed);
-  document.getElementById("calc-output").innerHTML = inputString;
-  document.getElementById("calc-sign").innerHTML = signString;
+  	document.getElementById("calc-output").innerHTML = inputString;
+  	document.getElementById("calc-sign").innerHTML = signString;
 
   console.log("The current Value " + currValue);
   console.log("The tracked Number " + trackedNumber);
@@ -27,13 +27,6 @@ function displayString(keypressed, asciipressed) {
 
 }
 
-function appendInputString(keypressed) {
-  if ((inputString == '0') && (keypressed != '.')) {
-    inputString = keypressed;
-  } else {
-    inputString += String(keypressed);
-  }
-}
 
 function initSymbols() {
   inputString = "";
@@ -65,10 +58,9 @@ function validateInput(keypressed, asciipressed) {
 
     case '+-':
       if (atStart) {
-        currValue = Number(trackedNumber);
-        trackedNumber = String(-1 * currValue);
-
-        check = trackedNumber;
+        currValue = -1 * Number(trackedNumber);
+        trackedNumber = String(currValue);
+		check = trackedNumber;
 
       } else {
         if (trackedNumber != '') {
@@ -84,14 +76,12 @@ function validateInput(keypressed, asciipressed) {
 
       break;
     case '.':
-      if (pointAlreadyUsed) {
-
-      } else {
+      if (!pointAlreadyUsed) {
         if (trackedNumber == '') {
           inputString = '0.';
           trackedNumber = '0';
         } else {
-          appendInputString(keypressed);
+           inputString += String(keypressed);;
         }
         trackedNumber += String(keypressed);
         pointAlreadyUsed = true;
@@ -115,7 +105,6 @@ function validateInput(keypressed, asciipressed) {
 
     default:
     	if (inputString == "0"){
-    		inputString = String(keypressed);
     		trackedNumber = String(keypressed);    		
     	}else{
 	      	trackedNumber += String(keypressed);
@@ -124,10 +113,9 @@ function validateInput(keypressed, asciipressed) {
 	        	currValue = Number(trackedNumber);
 	        	atStart = true;
 	      	}
-
-	      	inputString = String(trackedNumber);
-	      	signString = "";
+			signString = "";
      	}
+     	inputString = trackedNumber;
 
       break;
 
@@ -147,7 +135,7 @@ function evaluateandReset(keypressed) {
 }
 
 function doEvaluation() {
-
+	//once there is a currValue we are no longer at start
   if (atStart) {
     currValue = Number(trackedNumber);
     atStart = false;
