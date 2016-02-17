@@ -74,30 +74,37 @@ function validateInput(keypressed, asciipressed){
 
 		case '+-':
 			if (atStart ){
-				check=currValue = trackedNumber =-1 * trackedNumber;
+				currValue = Number(trackedNumber) ;
+				trackedNumber = String(-1 * currValue);
+				check = trackedNumber;
+				
 				atStart =false;
 
 			}else{
 				if (trackedNumber != '')
 				{
-					check=trackedNumber = -1 * trackedNumber;
+					check=trackedNumber = String(-1 * Number(trackedNumber));
 				}else{
-					check = currValue = -1 * currValue;
+					currValue = -1 * currValue;
+					check = String(currValue) 
 				}
 				
 			}
 			
-			inputString = String(check);
-			//trackedNumber ='';
-			lastSymbol;
-			
+			inputString = String(check);			
 
 			break;
 		case '.':
 			if (pointAlreadyUsed){
 
 			}else{
-				appendInputString(keypressed);
+				if (trackedNumber == ''){
+						inputString = '0.';
+						trackedNumber = '0';
+					}
+				else{
+						appendInputString(keypressed);
+					}
 				trackedNumber+=keypressed;
 				pointAlreadyUsed = true;
 			}
@@ -154,6 +161,9 @@ function doEvaluation(){
 			arithmeticEval();
 		}
 
+// if we get a NaN set to 0
+		if (isNaN(currValue))
+			currValue = 0;
 		inputString = String(currValue);
 }
 
@@ -172,7 +182,7 @@ function arithmeticEval(){
 		case '*': //times
 			currValue *= Number(trackedNumber);
 			break;
-		case '/': //divide
+		case '/': //dividei=
 			currValue /= Number(trackedNumber);
 			break;
 		case '=':
@@ -192,3 +202,5 @@ function arithmeticEval(){
 // -10 + 5 +- + 2 = -3
 // -10 + -5 = -15
 // -10. + -5. = -15
+// .2 + .5 = 7.1 + 3 =
+// 9 +- +- . = clear 0 +- +-
