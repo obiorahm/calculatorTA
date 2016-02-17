@@ -76,9 +76,9 @@ function validateInput(keypressed, asciipressed){
 			if (atStart ){
 				currValue = Number(trackedNumber) ;
 				trackedNumber = String(-1 * currValue);
-				check = trackedNumber;
 				
-				atStart =false;
+				check = trackedNumber;
+				//atStart =false;
 
 			}else{
 				if (trackedNumber != '')
