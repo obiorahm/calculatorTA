@@ -15,9 +15,9 @@ var atStart = true;
 //get the id of the clicked element
 
 function displayString(keypressed, asciipressed) {
-    validateInput(keypressed, asciipressed);
-  	document.getElementById("calc-output").innerHTML = inputString;
-  	document.getElementById("calc-sign").innerHTML = signString;
+  validateInput(keypressed, asciipressed);
+  document.getElementById("calc-output").innerHTML = inputString;
+  document.getElementById("calc-sign").innerHTML = signString;
 
   console.log("The current Value " + currValue);
   console.log("The tracked Number " + trackedNumber);
@@ -27,9 +27,8 @@ function displayString(keypressed, asciipressed) {
 
 }
 
-
-function initSymbols() {
-  inputString = "";
+function initVariables() {
+  inputString = "0";
 
   signString = "";
 
@@ -47,20 +46,14 @@ function initSymbols() {
 function validateInput(keypressed, asciipressed) {
   switch (String(keypressed)) {
     case "clear":
-      inputString = '0';
-      signString = "";
-      pointAlreadyUsed = false;
-      currValue = 0;
-      atStart = true;
-      lastSymbol = '';
-      trackedNumber = '';
+    	initVariables();
       break;
 
     case '+-':
       if (atStart) {
         currValue = -1 * Number(trackedNumber);
         trackedNumber = String(currValue);
-		check = trackedNumber;
+        check = trackedNumber;
 
       } else {
         if (trackedNumber != '') {
@@ -81,7 +74,7 @@ function validateInput(keypressed, asciipressed) {
           inputString = '0.';
           trackedNumber = '0';
         } else {
-           inputString += String(keypressed);;
+          inputString += String(keypressed);;
         }
         trackedNumber += String(keypressed);
         pointAlreadyUsed = true;
@@ -104,18 +97,18 @@ function validateInput(keypressed, asciipressed) {
       break;
 
     default:
-    	if (inputString == "0"){
-    		trackedNumber = String(keypressed);    		
-    	}else{
-	      	trackedNumber += String(keypressed);
+      if (inputString == "0") {
+        trackedNumber = String(keypressed);
+      } else {
+        trackedNumber += String(keypressed);
 
-	      	if ((lastSymbol == '+-') || (lastSymbol == '=')) {
-	        	currValue = Number(trackedNumber);
-	        	atStart = true;
-	      	}
-			signString = "";
-     	}
-     	inputString = trackedNumber;
+        if ((lastSymbol == '+-') || (lastSymbol == '=')) {
+          currValue = Number(trackedNumber);
+          atStart = true;
+        }
+        signString = "";
+      }
+      inputString = trackedNumber;
 
       break;
 
@@ -135,23 +128,29 @@ function evaluateandReset(keypressed) {
 }
 
 function doEvaluation() {
-	//once there is a currValue we are no longer at start
+  //once there is a currValue we are no longer at start
   if (atStart) {
     currValue = Number(trackedNumber);
     atStart = false;
   } else {
+  	if (trackedNumber == '')
+		if ((lastSymbol = '*') || (lastSymbol='/'))
+			trackedNumber = '1';
     arithmeticEval();
   }
 
   // if we get a NaN set to 0
   if (isNaN(currValue))
     currValue = 0;
-  inputString = String(currValue);
+  	inputString = String(currValue);
 }
 
 //find a way to convert string to symbol to do away with switch
 
 function arithmeticEval() {
+	
+	
+
 
   switch (lastSymbol) {
     case '+': //plus			
